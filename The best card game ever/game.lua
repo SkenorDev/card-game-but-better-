@@ -219,7 +219,7 @@ function powerCalcAll()
     for j, card in ipairs(areas[i].ePlay) do
       total = total - card.power
     end
-
+    powerHelp[i]=total
     if total == 0 then
       -- skip, nothing changes
     elseif total >= 1 then

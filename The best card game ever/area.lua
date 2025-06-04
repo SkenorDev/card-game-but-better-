@@ -44,4 +44,3 @@ for i, card in ipairs(self.aPlay) do
   end
 end
 
-

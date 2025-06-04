@@ -31,6 +31,7 @@ function love.load()
   aHand = {}
   eHand = {}
   aDiscard = 0
+  powerHelp = {0,0,0}
   eDiscard = 0 
   turnHelper = false
   delay = false
@@ -55,6 +56,7 @@ end
 
 
 function love.update()
+  
   if #toReveal>0 then
     if love.timer.getTime()>time then
     revealC(toReveal[1])
@@ -94,6 +96,7 @@ love.graphics.printf("End Turn", endTurnBtn.x, endTurnBtn.y + 15, endTurnBtn.w, 
 love.graphics.setFont(love.graphics.newFont(20))
 love.graphics.print("Player Score: " .. aScore, 20, 40)
 love.graphics.print("Enemy Score: " .. eScore, screenWidth - 200, 40)
+love.graphics.print("Current Power: " .. powerHelp[state], screenWidth - 200, 70)
 if win == true then
   love.graphics.setColor(0, 1, 0)
   love.graphics.printf("You Win!", 0, screenHeight / 2 - 100, screenWidth, "center")
