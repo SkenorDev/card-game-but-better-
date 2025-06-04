@@ -73,6 +73,16 @@ love.graphics.rectangle("fill", endTurnBtn.x, endTurnBtn.y, endTurnBtn.w, endTur
 love.graphics.setColor(1, 1, 1)
 love.graphics.print("Mana: " .. amana, 20, 70)
 love.graphics.printf("End Turn", endTurnBtn.x, endTurnBtn.y + 15, endTurnBtn.w, "center")
+resetTurnBtn = {
+    x = screenWidth - 150,
+    y = screenHeight - 40, -- just below endTurnBtn
+    w = 120,
+    h = 50
+  }
+  love.graphics.setColor(0.4, 0.1, 0.1)
+  love.graphics.rectangle("fill", resetTurnBtn.x, resetTurnBtn.y, resetTurnBtn.w, resetTurnBtn.h)
+  love.graphics.setColor(1, 1, 1)
+  love.graphics.printf("Reset Turn", resetTurnBtn.x, resetTurnBtn.y + 15, resetTurnBtn.w, "center")
 love.graphics.setFont(love.graphics.newFont(20))
 love.graphics.print("Player Score: " .. aScore, screenWidth -200, 70)
 love.graphics.print("Enemy Score: " .. eScore, screenWidth - 200, 90)

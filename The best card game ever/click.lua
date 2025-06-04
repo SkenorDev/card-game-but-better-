@@ -27,6 +27,10 @@ if x >= resetBtn.x and x <= resetBtn.x + resetBtn.w and
        y >= resetBtn.y and y <= resetBtn.y + resetBtn.h then
       start()
     end
+    if x >= resetTurnBtn.x and x <= resetTurnBtn.x + resetTurnBtn.w and
+       y >= resetTurnBtn.y and y <= resetTurnBtn.y + resetTurnBtn.h then
+      resetTurn()
+    end
   end
 
 function love.mousereleased(x, y, button)

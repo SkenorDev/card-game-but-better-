@@ -237,6 +237,18 @@ function flipCoin()
     return 2
   end
 end
+function resetTurn()
+for _, area in ipairs(areas) do
+      for i, card in ipairs(area.aPlay) do
+        if not card.face then
+          amana= amana + card.cost
+          card.face=true
+          table.insert(aHand, card)
+          table.remove(area.aPlay,i)
+        end
+      end
+    end
+    end
 function checkWin()
   if eScore>=20 and aScore>=20 then
     if eScore<aScore then
