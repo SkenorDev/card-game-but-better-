@@ -17,32 +17,12 @@ function love.load()
   screenWidth = 960
   screenHeight = 960
   love.window.setMode(screenWidth, screenHeight)
-  mana=1
-  loss=false
-  win=false
-  amana=mana
-  emana=mana
-  aScore=0
-  eScore=0
-  state = 2
-  grabbed ={}
-  aDeck = {}
-  eDeck = {}
-  aHand = {}
-  eHand = {}
-  aDiscard = 0
-  powerHelp = {0,0,0}
-  eDiscard = 0 
-  turnHelper = false
+  
   delay = false
  r = love.graphics.newImage("Assets/volcano.png")
  g = love.graphics.newImage("Assets/grass.png")
  b = love.graphics.newImage("Assets/water.jpg")
-  areas = {
-  AreaClass:new(r),
-  AreaClass:new(g),
-  AreaClass:new(b)
-}
+
 time = 0
   
   midY = screenHeight / 2
@@ -94,9 +74,9 @@ love.graphics.setColor(1, 1, 1)
 love.graphics.print("Mana: " .. amana, 20, 70)
 love.graphics.printf("End Turn", endTurnBtn.x, endTurnBtn.y + 15, endTurnBtn.w, "center")
 love.graphics.setFont(love.graphics.newFont(20))
-love.graphics.print("Player Score: " .. aScore, 20, 40)
-love.graphics.print("Enemy Score: " .. eScore, screenWidth - 200, 40)
-love.graphics.print("Current Power: " .. powerHelp[state], screenWidth - 200, 70)
+love.graphics.print("Player Score: " .. aScore, screenWidth -200, 70)
+love.graphics.print("Enemy Score: " .. eScore, screenWidth - 200, 90)
+love.graphics.print("Current Power: " .. powerHelp[state], screenWidth - 200, 110)
 if win == true then
   love.graphics.setColor(0, 1, 0)
   love.graphics.printf("You Win!", 0, screenHeight / 2 - 100, screenWidth, "center")
@@ -105,9 +85,41 @@ if loss == true then
 love.graphics.setColor(0, 1, 0)
   love.graphics.printf("You Lose!", 0, screenHeight / 2 - 100, screenWidth, "center")
 end
+resetBtn = {
+  x = screenWidth - 150,
+  y = 20,
+  w = 120,
+  h = 40
+}
+love.graphics.setColor(0.5, 0.1, 0.1)
+love.graphics.rectangle("fill", resetBtn.x, resetBtn.y, resetBtn.w, resetBtn.h)
+love.graphics.setColor(1, 1, 1)
+love.graphics.printf("Reset", resetBtn.x, resetBtn.y + 10, resetBtn.w, "center")
 end
 
 function start()
+  mana=1
+  loss=false
+  win=false
+  amana=mana
+  emana=mana
+  aScore=0
+  eScore=0
+  state = 2
+  grabbed ={}
+  aDeck = {}
+  eDeck = {}
+  aHand = {}
+  eHand = {}
+  aDiscard = 0
+  powerHelp = {0,0,0}
+  eDiscard = 0 
+  turnHelper = false
+    areas = {
+  AreaClass:new(r),
+  AreaClass:new(g),
+  AreaClass:new(b)
+}
   local allNames = {
     "WoodenCow", "Pegasus", "Minotaur", "Titan", "Zeus",
     "Midas", "Aphrodite", "Hera", "Artemis", "Persephone",

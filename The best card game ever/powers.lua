@@ -93,10 +93,10 @@ function zeus(side,area,tcard)
     
     function dionysus(side,area,tcard)
       if side ==1 then
-      tcard.power=tcard.power+ (#areas[area].aPlay*2)
+      tcard.power=tcard.power+ ((#areas[area].aPlay-1)*2)
     end
     if side ==2 then
-      tcard.power=tcard.power+ (#areas[area].ePlay*2)
+      tcard.power=tcard.power+ ((#areas[area].ePlay-1)*2)
       
     end
     end

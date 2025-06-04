@@ -18,10 +18,15 @@ for i, card in ipairs(aHand) do
     state =state + 1
      findPosition()
   end
+  
 if x >= endTurnBtn.x and x <= endTurnBtn.x + endTurnBtn.w and
    y >= endTurnBtn.y and y <= endTurnBtn.y + endTurnBtn.h and loss ==false and win==false then
    newTurn()
 end
+if x >= resetBtn.x and x <= resetBtn.x + resetBtn.w and
+       y >= resetBtn.y and y <= resetBtn.y + resetBtn.h then
+      start()
+    end
   end
 
 function love.mousereleased(x, y, button)
