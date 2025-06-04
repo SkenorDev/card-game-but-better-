@@ -62,10 +62,16 @@ function moveCards()
   end
 end
 function eDraw()
+  if #eHand>=7 then
+    return
+    end
   table.insert(eHand,eDeck[1])
   table.remove(eDeck,1)
 end
 function aDraw()
+   if #aHand>=7 then
+    return
+    end
   table.insert(aHand,aDeck[1])
   table.remove(aDeck,1)
   drawFindPos()

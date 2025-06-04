@@ -13,8 +13,9 @@ end
 
 
 function AreaClass:draw()
-  love.graphics.setColor(self.color)
-  love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+ 
+  love.graphics.draw(self.color,0, 0)
+  
   love.graphics.setColor(1, 1, 1) 
   
   love.graphics.setColor(1, 1, 1)

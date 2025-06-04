@@ -23,3 +23,10 @@ Observer Pattern- Used the observer Pattern to allow cards to use actions from t
  this for project 4 as I really want clean logic for the card function calls.
  
  Card Back - https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgglounge.pt%2Fwp-content%2Fuploads%2F2022%2F12%2FYu-Gi-Oh-Card-Back-Sleeves-Japanese-Size.jpeg&f=1&nofb=1&ipt=59435d9b26bb93c352e4227a62a5aae10ffc15c7a8d489092ebf9521b0399f40
+ 
+ 
+Grass - https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fart.pixilart.com%2F02aa0790086f91a.png&f=1&nofb=1&ipt=97fdf26f376434e3272ca6a1b21abcad290dad4fc036ad241386ebd6e9b86dd5
+
+water -  https://img.itch.zone/aW1hZ2UvMTkzMDQ1Ni8xMTM0OTY1OS5qcGc=/original/Bdb0L0.jpg
+
+volcano - https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpreview.redd.it%2Fvolcanic-eruption-in-the-style-of-pixel-art-v0-ca0dl2tgceba1.png%3Fwidth%3D1024%26format%3Dpng%26auto%3Dwebp%26s%3D5f68d75ccdc7c5712a95b9d4358914b82430b11a&f=1&nofb=1&ipt=c8e9a77c75ead02cb493113725e54b709fc979a0192739e28a5c70b242edde76

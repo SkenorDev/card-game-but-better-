@@ -34,9 +34,9 @@ function love.load()
   eDiscard = 0 
   turnHelper = false
   delay = false
-  local r = {0.5, 0, 0}
-  local g = {0, 0.5, 0}
-  local b = {0, 0, 0.5}
+ r = love.graphics.newImage("Assets/volcano.png")
+ g = love.graphics.newImage("Assets/grass.png")
+ b = love.graphics.newImage("Assets/water.jpg")
   areas = {
   AreaClass:new(r),
   AreaClass:new(g),
