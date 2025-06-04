@@ -32,6 +32,7 @@ function love.load()
   eHand = {}
   aDiscard = 0
   eDiscard = 0 
+  turnHelper = false
   delay = false
   local r = {0.5, 0, 0}
   local g = {0, 0.5, 0}
@@ -54,7 +55,17 @@ end
 
 
 function love.update()
-  
+  if #toReveal>0 then
+    if love.timer.getTime()>time then
+    revealC(toReveal[1])
+    table.remove(toReveal,1)
+    time =love.timer.getTime()+1
+    end
+  end
+  if #toReveal==0 and turnHelper==true then
+    turnHelper=false
+    finishTurn()
+    end
   moveCards()
 end
 

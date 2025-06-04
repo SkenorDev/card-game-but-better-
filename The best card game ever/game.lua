@@ -81,17 +81,9 @@ end
 function newTurn()
   chatGPT()
   reveal()
-  while #toReveal>0 do
-    if love.timer.getTime()>time then
-    
-    revealC(toReveal[1])
-    table.remove(toReveal,1)
-    time =love.timer.getTime()+1
-    end
-  
-    
-  end
- 
+  turnHelper=true
+ end
+ function finishTurn()
   powerCalcAll()
   checkWin()
   aDraw()
