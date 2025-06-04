@@ -1,4 +1,5 @@
 function aPlay(card)
+
   if card.cost> amana then
    -- print("too expensive")
     return
@@ -8,6 +9,7 @@ function aPlay(card)
     return
     end
   card.face=false
+  card.side=1
   card.table=state
   amana=amana-card.cost
   -- Remove from aHand
@@ -35,8 +37,9 @@ function ePlay(card)
     print("too many")
     return
   end
-  card.table=state
+  card.table=randState
   card.face=false
+  card.side=2
   emana = emana - card.cost
   -- Remove from eHand
   for i, c in ipairs(eHand) do
@@ -76,7 +79,19 @@ function shuffle(tbl)
 end
 
 function newTurn()
+  chatGPT()
   reveal()
+  while #toReveal>0 do
+    if love.timer.getTime()>time then
+    
+    revealC(toReveal[1])
+    table.remove(toReveal,1)
+    time =love.timer.getTime()+1
+    end
+  
+    
+  end
+ 
   powerCalcAll()
   checkWin()
   aDraw()
@@ -84,8 +99,6 @@ function newTurn()
   mana=mana+1
   amana=mana
   emana=mana
-  chatGPT()
-  print(loss)
 end
 function aDiscard(dcard,cstate)
   for i,card in ipairs(areas[cstate].aPlay) do
@@ -123,130 +136,101 @@ function eDiscardHand(dcard)
     end
   end
 end
-function revealA(i,table,card)
-   state=i
-  card.rev(1,table,card)  
+function revealC(card)
+   state=card.table
+   card.face = true
+   if card.rev then
+  card.rev(card.side,card.table,card)
 end
-function revealE(i,table,card)
-   state=i
-  card.rev(2,table,card)
-  end
+  findPosition()
+
+end
+
 function reveal() 
-  local laststate=state
+  toReveal = {}
+
   if aScore > eScore then
-   for i, area in ipairs(areas) do
-   for f, card in ipairs(area.aPlay) do
-   if card.face == false then
-     if card.rev then
-       revealA(i,card.table,card)
-end
+    for _, area in ipairs(areas) do
+      for _, card in ipairs(area.aPlay) do
+        if not card.face then
+          table.insert(toReveal, card)
+        end
+      end
+      for _, card in ipairs(area.ePlay) do
+        if not card.face then
+          table.insert(toReveal, card)
+        end
+      end
+    end
 
-     card.face = true
-   end
- end
- for f, card in ipairs(area.ePlay) do
-    if card.face == false then
-      if card.rev then
-         revealE(i,card.table,card)
+  elseif eScore > aScore then
+    for _, area in ipairs(areas) do
+      for _, card in ipairs(area.ePlay) do
+        if not card.face then
+          table.insert(toReveal, card)
+        end
+      end
+      for _, card in ipairs(area.aPlay) do
+        if not card.face then
+          table.insert(toReveal, card)
+        end
+      end
+    end
 
-end
-     card.face = true
-     
-   end
- end
-end
-end
-if eScore > aScore then
-   for i, area in ipairs(areas) do
-   for f, card in ipairs(area.ePlay) do
-   if card.face == false then
-     if card.rev then
-      revealE(i,card.table,card)
-end
-     card.face = true
-   end
- end
- for f, card in ipairs(area.aPlay) do
-    if card.face == false then
-      if card.rev then
-        revealA(i,card.table,card)
-
-end
-     card.face = true
-   end
- end
-end
-end
-if eScore == aScore then
-  coin =flipCoin()
-  if coin ==1 then
-   for i, area in ipairs(areas) do
-   for f, card in ipairs(area.aPlay) do
-   if card.face == false then
-     if card.rev then
-      revealA(i,card.table,card) 
-
-end
-     card.face = true
-   end
- end
- for f, card in ipairs(area.ePlay) do
-    if card.face == false then
-      if card.rev then
-        revealE(i,card.table,card)
-
-end
-     card.face = true
-   end
- end
-end
-end
-if coin==2 then
-   for i, area in ipairs(areas) do
-   for f, card in ipairs(area.ePlay) do
-   if card.face == false then
-     if card.rev then
-     revealE(i,card.table,card)
-end
-     card.face = true
-   end
- end
- for f, card in ipairs(area.aPlay) do
-    if card.face == false then
-      if card.rev then
-       revealA(i,card.table,card)
-
-end
-     card.face = true
-   end
- end
-end
-end
+  else -- tie
+    local coin = flipCoin()
+    if coin == 1 then
+      for _, area in ipairs(areas) do
+        for _, card in ipairs(area.aPlay) do
+          if not card.face then
+            table.insert(toReveal, card)
+          end
+        end
+        for _, card in ipairs(area.ePlay) do
+          if not card.face then
+            table.insert(toReveal, card)
+          end
+        end
+      end
+    else -- coin == 2
+      for _, area in ipairs(areas) do
+        for _, card in ipairs(area.ePlay) do
+          if not card.face then
+            table.insert(toReveal, card)
+          end
+        end
+        for _, card in ipairs(area.aPlay) do
+          if not card.face then
+            table.insert(toReveal, card)
+          end
+        end
+      end
+    end
   end
+end
 
-  end
+
 
 function powerCalcAll()
-  local total=0
-  for i, area in ipairs(areas) do
- for i, card in ipairs(area.aPlay) do
-   total= total +card.power
- end
- for i, card in ipairs(area.ePlay) do
-   total= total -card.power
-   end
-end
-if total == 0 then
-  return
-end
-if total >= 1 then
-  aScore= aScore+total
-end
-if total <= -1 then
-  eScore= eScore+(-1*total)
+  for i = 1, 3 do
+    local total = 0
+
+    for j, card in ipairs(areas[i].aPlay) do
+      total = total + card.power
+    end
+    for j, card in ipairs(areas[i].ePlay) do
+      total = total - card.power
+    end
+
+    if total == 0 then
+      -- skip, nothing changes
+    elseif total >= 1 then
+      aScore = aScore + total
+    else -- total <= -1
+      eScore = eScore + (-1 * total)
+    end
   end
 end
-
 
 function flipCoin()
   if math.random() < 0.5 then

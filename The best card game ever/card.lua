@@ -15,6 +15,7 @@ function CardClass:new(name,cost,power,desc,rev)
   card.size = Vector(100, 140)
   card.scale = 0.1
   card.table = nil
+  card.side= nil
   backImage = love.graphics.newImage("Assets/back.jpeg")
   return card
 end

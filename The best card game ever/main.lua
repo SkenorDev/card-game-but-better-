@@ -32,6 +32,7 @@ function love.load()
   eHand = {}
   aDiscard = 0
   eDiscard = 0 
+  delay = false
   local r = {0.5, 0, 0}
   local g = {0, 0.5, 0}
   local b = {0, 0, 0.5}
@@ -39,17 +40,21 @@ function love.load()
   AreaClass:new(r),
   AreaClass:new(g),
   AreaClass:new(b)
-  }
+}
+time = 0
+  
   midY = screenHeight / 2
   arrowSize = 40
   arrowMargin = 20
   lilFont = love.graphics.newFont(10)
   bigFont = love.graphics.newFont(18)
+  toReveal ={}
   start()
 end
 
 
 function love.update()
+  
   moveCards()
 end
 
@@ -128,23 +133,14 @@ aDraw()
 eDraw()
 eDraw()
 eDraw()
-chatGPT()
+
 end
 
 
 
 function debug()
   print("--- DEBUG INFO ---")
-  print("aDeck:")
-  for i, card in ipairs(aDeck) do
-    print(i, card.name)
-  end
-
-  print("eDeck:")
-  for i, card in ipairs(eDeck) do
-    print(i, card.name)
-  end
-
+ 
   print("aHand:")
   for i, card in ipairs(aHand) do
     print(i, card.name)
@@ -155,9 +151,15 @@ function debug()
     print(i, card.name)
   end
 
-  print("aPlay (Area " .. state .. "):")
-  for i, card in ipairs(areas[state].aPlay or {}) do
-    print(i, card.name)
+  for area = 1, 3 do
+    print("aPlay (Area " .. area .. "):")
+    for i, card in ipairs(areas[area].aPlay or {}) do
+      print(i, card.name)
+    end
+
+    print("ePlay (Area " .. area .. "):")
+    for i, card in ipairs(areas[area].ePlay or {}) do
+      print(i, card.name)
+    end
   end
 end
-
