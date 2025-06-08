@@ -171,31 +171,3 @@ eDraw()
 eDraw()
 
 end
-
-
-
-function debug()
-  print("--- DEBUG INFO ---")
- 
-  print("aHand:")
-  for i, card in ipairs(aHand) do
-    print(i, card.name)
-  end
-
-  print("eHand:")
-  for i, card in ipairs(eHand) do
-    print(i, card.name)
-  end
-
-  for area = 1, 3 do
-    print("aPlay (Area " .. area .. "):")
-    for i, card in ipairs(areas[area].aPlay or {}) do
-      print(i, card.name)
-    end
-
-    print("ePlay (Area " .. area .. "):")
-    for i, card in ipairs(areas[area].ePlay or {}) do
-      print(i, card.name)
-    end
-  end
-end
